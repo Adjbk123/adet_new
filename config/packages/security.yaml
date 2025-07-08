@@ -42,15 +42,10 @@ security:
         - { path: ^/login, roles: PUBLIC_ACCESS }
         - { path: ^/register, roles: PUBLIC_ACCESS }
         - { path: ^/logout, roles: PUBLIC_ACCESS }
-        
+
         # Routes d'administration protégées
-        - { path: ^/etudiant, roles: ROLE_USER }
-        - { path: ^/etablissement, roles: ROLE_USER }
-        - { path: ^/filiere, roles: ROLE_USER }
-        - { path: ^/niveau_etude, roles: ROLE_USER }
-        - { path: ^/commission, roles: ROLE_USER }
-        - { path: ^/village, roles: ROLE_USER }
-        - { path: ^/annee_academique, roles: ROLE_USER }
+        - { path: ^/admin, roles: ROLE_USER }
+
 
 when@test:
     security:

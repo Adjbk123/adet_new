@@ -1,3 +1,7 @@
-body {
-    background-color: skyblue;
+html, body, * {
+    font-family: 'Montserrat', Arial, sans-serif !important;
+}
+
+.label-bold {
+    font-weight: 700 !important;
 }

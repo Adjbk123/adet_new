@@ -1,0 +1,267 @@
+
+<!DOCTYPE html>
+<html lang="fr" class="js">
+
+<head>
+    <base href="../">
+    <meta charset="utf-8">
+    <meta name="author" content="AdET">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Application de gestion des étudiants AdET">
+    <!-- Fav Icon  -->
+    <link rel="shortcut icon" href="{{ asset('images/favicon.png') }}">
+    <!-- Page Title  -->
+    <title>{% block title %}{% endblock %} | AdET Administration</title>
+    <!-- StyleSheets  -->
+    <link rel="stylesheet" href="{{ asset('assets/css/dashlite.css') }}?ver=3.2.2">
+    <link id="skin-default" rel="stylesheet" href="{{ asset('assets/css/theme.css') }}?ver=3.2.2">
+</head>
+
+<body class="nk-body bg-lighter ">
+<div class="nk-app-root">
+    <!-- wrap @s -->
+    <div class="nk-wrap ">
+        <!-- main header @s -->
+        <div class="nk-header is-light">
+            <div class="container-fluid">
+                <div class="nk-header-wrap">
+                    <div class="nk-menu-trigger me-sm-2 d-lg-none">
+                        <a href="#" class="nk-nav-toggle nk-quick-nav-icon" data-target="headerNav"><em class="icon ni ni-menu"></em></a>
+                    </div>
+                    <div class="nk-header-brand">
+                        <a href="{{ path('app_accueil') }}" class="logo-link">
+                            <img class="logo-light logo-img" src="{{ asset('images/logo.png') }}" srcset="{{ asset('images/logo2x.png') }} 2x" alt="logo">
+                            <img class="logo-dark logo-img" src="{{ asset('images/logo-dark.png') }}" srcset="{{ asset('images/logo-dark2x.png') }} 2x" alt="logo-dark">
+                        </a>
+                    </div><!-- .nk-header-brand -->
+                    <div class="nk-header-menu ms-auto" data-content="headerNav">
+                        <div class="nk-header-mobile">
+                            <div class="nk-header-brand">
+                                <a href="{{ path('app_accueil') }}" class="logo-link">
+                                    <img class="logo-light logo-img" src="{{ asset('images/logo.png') }}" srcset="{{ asset('images/logo2x.png') }} 2x" alt="logo">
+                                    <img class="logo-dark logo-img" src="{{ asset('images/logo-dark.png') }}" srcset="{{ asset('images/logo-dark2x.png') }} 2x" alt="logo-dark">
+                                </a>
+                            </div>
+                            <div class="nk-menu-trigger me-n2">
+                                <a href="#" class="nk-nav-toggle nk-quick-nav-icon" data-target="headerNav"><em class="icon ni ni-arrow-left"></em></a>
+                            </div>
+                        </div>
+                        <ul class="nk-menu nk-menu-main ui-s2">
+
+                            <li class="nk-menu-item">
+                                <a href="{{ path('app_admin') }}" class="nk-menu-link">
+                                    <span class="nk-menu-text">Tableau de bord</span>
+                                </a>
+                            </li>
+                            <li class="nk-menu-item has-sub">
+                                <a href="#" class="nk-menu-link nk-menu-toggle">
+                                    <span class="nk-menu-text">Gestion</span>
+                                </a>
+                                <ul class="nk-menu-sub">
+                                    <li class="nk-menu-item">
+                                        <a href="{{ path('app_etudiant_index') }}" class="nk-menu-link">
+                                            <span class="nk-menu-text">Étudiants</span>
+                                        </a>
+                                    </li>
+                                    <li class="nk-menu-item">
+                                        <a href="{{ path('app_etablissement_index') }}" class="nk-menu-link">
+                                            <span class="nk-menu-text">Établissements</span>
+                                        </a>
+                                    </li>
+                                    <li class="nk-menu-item">
+                                        <a href="{{ path('app_filiere_index') }}" class="nk-menu-link">
+                                            <span class="nk-menu-text">Filières</span>
+                                        </a>
+                                    </li>
+                                    <li class="nk-menu-item">
+                                        <a href="{{ path('app_niveau_etude_index') }}" class="nk-menu-link">
+                                            <span class="nk-menu-text">Niveaux d'étude</span>
+                                        </a>
+                                    </li>
+                                    <li class="nk-menu-item">
+                                        <a href="{{ path('app_commission_index') }}" class="nk-menu-link">
+                                            <span class="nk-menu-text">Commissions</span>
+                                        </a>
+                                    </li>
+                                    <li class="nk-menu-item">
+                                        <a href="{{ path('app_village_index') }}" class="nk-menu-link">
+                                            <span class="nk-menu-text">Villages</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="nk-menu-item has-sub">
+                                <a href="#" class="nk-menu-link nk-menu-toggle">
+                                    <span class="nk-menu-text">Pages</span>
+                                </a>
+                                <ul class="nk-menu-sub">
+                                    <li class="nk-menu-item">
+                                        <a href="{{ path('app_contact') }}" class="nk-menu-link">
+                                            <span class="nk-menu-text">Contact</span>
+                                        </a>
+                                    </li>
+                                    <li class="nk-menu-item">
+                                        <a href="{{ path('app_appropos') }}" class="nk-menu-link">
+                                            <span class="nk-menu-text">À propos</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul><!-- .nk-menu -->
+                    </div><!-- .nk-header-menu -->
+                    <div class="nk-header-tools">
+                        <ul class="nk-quick-nav">
+                            <li class="dropdown language-dropdown d-none d-sm-block me-n1">
+                                <a href="#" class="dropdown-toggle nk-quick-nav-icon" data-bs-toggle="dropdown">
+                                    <div class="quick-icon border border-light">
+                                        <img class="icon" src="{{ asset('images/flags/french-sq.png') }}" alt="">
+                                    </div>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-end dropdown-menu-s1">
+                                    <ul class="language-list">
+                                        <li>
+                                            <a href="#" class="language-item">
+                                                <img src="{{ asset('images/flags/french.png') }}" alt="" class="language-flag">
+                                                <span class="language-name">Français</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="language-item">
+                                                <img src="{{ asset('images/flags/english.png') }}" alt="" class="language-flag">
+                                                <span class="language-name">English</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li><!-- .dropdown -->
+                            <li class="dropdown user-dropdown">
+                                <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown">
+                                    <div class="user-toggle">
+                                        <div class="user-avatar sm">
+                                            <em class="icon ni ni-user-alt"></em>
+                                        </div>
+                                    </div>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-md dropdown-menu-end dropdown-menu-s1 is-light">
+                                    <div class="dropdown-inner user-card-wrap bg-lighter d-none d-md-block">
+                                        <div class="user-card">
+                                            <div class="user-avatar">
+                                                <span>Ad</span>
+                                            </div>
+                                            <div class="user-info">
+                                                <span class="lead-text">Administrateur</span>
+                                                <span class="sub-text">admin@adet.com</span>
+                                            </div>
+                                            <div class="user-action">
+                                                <a class="btn btn-icon me-n2" href="#"><em class="icon ni ni-setting"></em></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="dropdown-inner">
+                                        <ul class="link-list">
+                                            <li><a href="#"><em class="icon ni ni-user-alt"></em><span>Voir le profil</span></a></li>
+                                            <li><a href="#"><em class="icon ni ni-setting-alt"></em><span>Paramètres</span></a></li>
+                                            <li><a class="dark-mode-switch" href="#"><em class="icon ni ni-moon"></em><span>Mode sombre</span></a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="dropdown-inner">
+                                        <ul class="link-list">
+                                            <li><a href="{{ path('app_logout') }}"><em class="icon ni ni-signout"></em><span>Se déconnecter</span></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </li><!-- .dropdown -->
+                        </ul><!-- .nk-quick-nav -->
+                    </div><!-- .nk-header-tools -->
+                </div><!-- .nk-header-wrap -->
+            </div><!-- .container-fliud -->
+        </div>
+        <!-- main header @e -->
+        <!-- content @s -->
+        <div class="nk-content ">
+            <div class="container-fluid">
+                <div class="nk-content-inner">
+                    <div class="nk-content-body">
+                        <div class="nk-block-head nk-block-head-sm">
+                            <div class="nk-block-between">
+                                <div class="nk-block-head-content">
+                                    <h3 class="nk-block-title page-title">{% block page_title %}AdET Administration{% endblock %}</h3>
+                                    <div class="nk-block-des text-soft">
+                                        <p>{% block page_description %}Bienvenue dans le tableau de bord AdET.{% endblock %}</p>
+                                    </div>
+                                </div><!-- .nk-block-head-content -->
+                                <div class="nk-block-head-content">
+                                    <div class="toggle-wrap nk-block-tools-toggle">
+                                        <a href="#" class="btn btn-icon btn-trigger toggle-expand me-n1" data-target="pageMenu"><em class="icon ni ni-more-v"></em></a>
+                                        <div class="toggle-expand-content" data-content="pageMenu">
+                                            <ul class="nk-block-tools g-3">
+
+                                                <li class="nk-block-tools-opt">
+                                                   {% block button %}
+                                                   {% endblock %}
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div><!-- .nk-block-head-content -->
+                            </div><!-- .nk-block-between -->
+                        </div><!-- .nk-block-head -->
+                        <div class="nk-block">
+                            <div class="card">
+                                <div class="card-body">
+                                    {% block body %}
+                                    {%  endblock %}
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- content @e -->
+        <!-- footer @s -->
+        <div class="nk-footer bg-white">
+            <div class="container-fluid">
+                <div class="nk-footer-wrap">
+                    <div class="nk-footer-copyright"> &copy; {{ date()|date('Y')}} AdET. Tous droits réservés.
+                    </div>
+                    <div class="nk-footer-links">
+                        <ul class="nav nav-sm">
+                            <li class="nav-item dropup">
+                                <a href="#" class="dropdown-toggle dropdown-indicator has-indicator nav-link text-base" data-bs-toggle="dropdown" data-offset="0,10"><span>Français</span></a>
+                                <div class="dropdown-menu dropdown-menu-sm dropdown-menu-end">
+                                    <ul class="language-list">
+                                        <li>
+                                            <a href="#" class="language-item">
+                                                <span class="language-name">Français</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="language-item">
+                                                <span class="language-name">English</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- footer @e -->
+    </div>
+    <!-- wrap @e -->
+</div>
+<!-- app-root @e -->
+
+<!-- JavaScript -->
+<script src="{{ asset('assets/js/bundle.js') }}?ver=3.2.2"></script>
+<script src="{{ asset('assets/js/scripts.js') }}?ver=3.2.2"></script>
+<script src="{{ asset('assets/js/charts/gd-analytics.js') }}?ver=3.2.2"></script>
+<script src="{{ asset('assets/js/libs/jqvmap.js') }}?ver=3.2.2"></script>
+</body>
+
+</html>

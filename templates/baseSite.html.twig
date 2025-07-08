@@ -1,0 +1,153 @@
+
+<!DOCTYPE html>
+<html lang="fr" class="js">
+
+<head>
+    <base href="../">
+    <meta charset="utf-8">
+    <meta name="author" content="AdET">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Application de gestion des étudiants AdET">
+    <!-- Fav Icon  -->
+    <link rel="shortcut icon" href="{{ asset('images/favicon.png') }}">
+    <!-- Page Title  -->
+    <title>{% block title %}{% endblock %} | AdET</title>
+    <!-- StyleSheets  -->
+    <link rel="stylesheet" href="{{ asset('assets-landing/css/dashlite.css') }}?ver=3.2.2">
+    <link id="skin-default" rel="stylesheet" href="{{ asset('assets-landing/css/theme.css') }}?ver=3.2.2">
+</head>
+
+<body class="nk-body bg-white npc-landing">
+<div class="nk-app-root">
+    <!-- main @s -->
+    <div class="nk-main">
+        <header class="header header-32 has-header-main-s1 bg-dark" id="home">
+            <div class="header-main header-main-s1 is-sticky is-transparent on-dark">
+                <div class="container header-container">
+                    <div class="header-wrap">
+                        <div class="header-logo">
+                            <a href="{{ path('app_accueil') }}" class="logo-link">
+                                <img class="logo-light logo-img" src="{{ asset('images/logo.png') }}" srcset="./images/logo2x.png 2x" alt="logo">
+                                <img class="logo-dark logo-img" src="{{ asset('images/logo-dark.png') }}" srcset="./images/logo-dark2x.png 2x" alt="logo-dark">
+                            </a>
+                        </div>
+                        <div class="header-toggle">
+                            <button class="menu-toggler" data-target="mainNav">
+                                <em class="menu-on icon ni ni-menu"></em>
+                                <em class="menu-off icon ni ni-cross"></em>
+                            </button>
+                        </div><!-- .header-nav-toggle -->
+                        <nav class="header-menu mobile-menu" data-content="mainNav">
+                            <ul class="menu-list ms-lg-auto">
+                                <li class="menu-item">
+                                    <a href="{{ path('app_accueil') }}" class="menu-link nav-link">Accueil</a>
+                                </li>
+                                <li class="menu-item">
+                                    <a href="{{ path('app_contact') }}" class="menu-link nav-link">Contact</a>
+                                </li>
+                                <li class="menu-item">
+                                    <a href="{{ path('app_appropos') }}" class="menu-link nav-link">À propos</a>
+                                </li>
+                                <li class="menu-item has-sub">
+                                    <a href="#" class="menu-link menu-toggle">Administration</a>
+                                    <div class="menu-sub">
+                                        <ul class="menu-list">
+                                            <li class="menu-item">
+                                                <a href="{{ path('app_admin') }}" class="menu-link">Tableau de bord</a>
+                                            </li>
+                                            <li class="menu-item">
+                                                <a href="{{ path('app_etudiant_index') }}" class="menu-link">Étudiants</a>
+                                            </li>
+                                            <li class="menu-item">
+                                                <a href="{{ path('app_etablissement_index') }}" class="menu-link">Établissements</a>
+                                            </li>
+                                            <li class="menu-item">
+                                                <a href="{{ path('app_filiere_index') }}" class="menu-link">Filières</a>
+                                            </li>
+                                            <li class="menu-item">
+                                                <a href="{{ path('app_commission_index') }}" class="menu-link">Commissions</a>
+                                            </li>
+                                            <li class="menu-item">
+                                                <a href="{{ path('app_village_index') }}" class="menu-link">Villages</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
+                            </ul>
+                            <ul class="menu-btns">
+                                <li>
+                                    <a href="{{ path('app_login') }}" class="btn btn-primary btn-lg">Connexion</a>
+                                </li>
+                            </ul>
+                        </nav><!-- .nk-nav-menu -->
+                    </div><!-- .header-warp-->
+                </div><!-- .container-->
+            </div><!-- .header-main-->
+                        <div class="header-content py-6 is-dark mt-lg-n1 mt-n3">
+                <div class="container">
+                    <div class="row flex-row-reverse justify-content-center text-center g-gs">
+                        <div class="col-lg-8 col-md-8">
+                            <div class="header-caption">
+                                <h1 class="header-title">{% block page_title %}AdET - Application de gestion des étudiants{% endblock %}</h1>
+                                <p>{% block page_description %}Une application moderne pour la gestion des étudiants, des établissements et des commissions.{% endblock %}</p>
+
+                            </div><!-- .header-caption -->
+                        </div><!-- .col -->
+                    </div><!-- .row -->
+                </div><!-- .container -->
+            </div><!-- .header-content -->
+        </header>
+        <!-- Contenu principal -->
+        <main class="main-content">
+
+            <section class="pb-0" >
+                <div class="container py-7 ">
+                    {% block body %}
+                    {% endblock %}
+                </div><!-- .container -->
+            </section>
+        </main>
+
+        <footer class="footer bg-dark is-dark section section-sm" id="footer">
+            <div class="container">
+                <div class="row g-3 align-items-center">
+                    <div class="col-md-3">
+                        <div class="footer-logo">
+                            <a href="{{ path('app_accueil') }}" class="logo-link">
+                                <img class="logo-light logo-img" src="{{ asset('images/logo.png') }}" srcset="{{ asset('images/logo2x.png') }} 2x" alt="logo">
+                                <img class="logo-dark logo-img" src="{{ asset('images/logo-dark.png') }}" srcset="{{ asset('images/logo-dark2x.png') }} 2x" alt="logo-dark">
+                            </a>
+                        </div><!-- .footer-logo -->
+                    </div><!-- .col -->
+                    <div class="col-md-9 d-flex justify-content-md-end">
+                        <ul class="link-inline gx-4">
+                            <li><a href="{{ path('app_accueil') }}">Accueil</a></li>
+                            <li><a href="{{ path('app_contact') }}">Contact</a></li>
+                            <li><a href="{{ path('app_appropos') }}">À propos</a></li>
+                        </ul><!-- .footer-nav -->
+                    </div><!-- .col -->
+                </div>
+                <div class="row g-3 align-items-center pt-4">
+                    <div class="col-md-8">
+                        <div class="text-base">&copy; 2024 AdET. Tous droits réservés.</div>
+                    </div><!-- .col -->
+                    <div class="col-md-4 d-flex justify-content-md-end">
+                        <ul class="social">
+                            <li><a href="#"><em class="icon ni ni-facebook-f"></em></a></li>
+                            <li><a href="#"><em class="icon ni ni-instagram"></em></a></li>
+                            <li><a href="#"><em class="icon ni ni-twitter"></em></a></li>
+                        </ul><!-- .footer-icon -->
+                    </div><!-- .col -->
+                </div><!-- .row -->
+            </div><!-- .container -->
+        </footer><!-- .footer -->
+    </div>
+    <!-- main @e -->
+</div>
+<!-- app-root @e -->
+<!-- JavaScript -->
+<script src="{{ asset('assets-landing/js/bundle.js') }}?ver=3.2.2"></script>
+<script src="{{ asset('assets-landing/js/scripts.js') }}?ver=3.2.2"></script>
+</body>
+
+</html>

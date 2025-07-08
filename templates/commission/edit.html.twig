@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Commission{% endblock %}
+
+{% block body %}
+    <h1>Edit Commission</h1>
+
+    {{ include('commission/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_commission_index') }}">back to list</a>
+
+    {{ include('commission/_delete_form.html.twig') }}
+{% endblock %}

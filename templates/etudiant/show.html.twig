@@ -1,0 +1,231 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détail de l'étudiant{% endblock %}
+
+{% block body %}
+
+
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">Informations de l'étudiant</h5>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-borderless">
+                            <tbody>
+                                <tr>
+                                    <th width="200">Nom complet :</th>
+                                    <td><strong>{{ etudiant.nom }} {{ etudiant.prenoms }}</strong></td>
+                                </tr>
+                                <tr>
+                                    <th>Sexe :</th>
+                                    <td>
+                                        <span class="badge bg-{{ etudiant.sexe == 'Masculin' ? 'primary' : 'danger' }}">
+                                            {{ etudiant.sexe }}
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>Date de naissance :</th>
+                                    <td>{{ etudiant.dateNaissance ? etudiant.dateNaissance|date('d/m/Y') : 'Non renseigné' }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Lieu de naissance :</th>
+                                    <td>{{ etudiant.lieuNaissance ?? 'Non renseigné' }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Village d'origine :</th>
+                                    <td>{{ etudiant.village ? etudiant.village.nom : 'Non renseigné' }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Téléphone :</th>
+                                    <td>
+                                        {% if etudiant.telephone %}
+                                            <a href="tel:{{ etudiant.telephone }}">{{ etudiant.telephone }}</a>
+                                        {% else %}
+                                            Non renseigné
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>Email :</th>
+                                    <td>
+                                        {% if etudiant.email %}
+                                            <a href="mailto:{{ etudiant.email }}">{{ etudiant.email }}</a>
+                                        {% else %}
+                                            Non renseigné
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            {% if etudiant.informationAcademiques|length > 0 %}
+                {% set infoAcad = etudiant.informationAcademiques|first %}
+                <div class="card mt-4">
+                    <div class="card-header">
+                        <h5 class="mb-0">Informations académiques</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-borderless">
+                                <tbody>
+                                    <tr>
+                                        <th width="200">Niveau d'étude :</th>
+                                        <td>{{ infoAcad.niveauEtude ? infoAcad.niveauEtude.libelle : 'Non renseigné' }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Filière :</th>
+                                        <td>{{ infoAcad.filiere ? infoAcad.filiere.nom : 'Non renseigné' }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Établissement :</th>
+                                        <td>{{ infoAcad.etablissement ? infoAcad.etablissement.nom : 'Non renseigné' }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Année académique :</th>
+                                        <td>{{ infoAcad.anneeAcademique ? infoAcad.anneeAcademique.libelle : 'Non renseigné' }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+
+            {% if etudiant.informationSociales|length > 0 %}
+                {% set infoSoc = etudiant.informationSociales|first %}
+                <div class="card mt-4">
+                    <div class="card-header">
+                        <h5 class="mb-0">Contact social</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-borderless">
+                                <tbody>
+                                    <tr>
+                                        <th width="200">Nom du contact :</th>
+                                        <td>{{ infoSoc.nomContact ?? 'Non renseigné' }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Téléphone du contact :</th>
+                                        <td>
+                                            {% if infoSoc.numeroTelephone %}
+                                                <a href="tel:{{ infoSoc.numeroTelephone }}">{{ infoSoc.numeroTelephone }}</a>
+                                            {% else %}
+                                                Non renseigné
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+
+            {% if etudiant.engagements|length > 0 %}
+                {% set engagement = etudiant.engagements|first %}
+                <div class="card mt-4">
+                    <div class="card-header">
+                        <h5 class="mb-0">Engagement</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-borderless">
+                                <tbody>
+                                    <tr>
+                                        <th width="200">Participation aux activités :</th>
+                                        <td>
+                                            <span class="badge bg-{{ engagement.isParticipeActivite ? 'success' : 'secondary' }}">
+                                                {{ engagement.isParticipeActivite ? 'Oui' : 'Non' }}
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Souhaite devenir membre actif :</th>
+                                        <td>
+                                            <span class="badge bg-{{ engagement.isSouhaiteDevenirMembre ? 'success' : 'secondary' }}">
+                                                {{ engagement.isSouhaiteDevenirMembre ? 'Oui' : 'Non' }}
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Souhaite intégrer une commission :</th>
+                                        <td>
+                                            <span class="badge bg-{{ engagement.isSouhaiteIntegrerCommission ? 'success' : 'secondary' }}">
+                                                {{ engagement.isSouhaiteIntegrerCommission ? 'Oui' : 'Non' }}
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    {% if engagement.commission %}
+                                        <tr>
+                                            <th>Commission souhaitée :</th>
+                                            <td>{{ engagement.commission.nom }}</td>
+                                        </tr>
+                                    {% endif %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">Actions</h5>
+                </div>
+                <div class="card-body">
+                    <div class="d-grid gap-2">
+                        <a href="{{ path('app_etudiant_index') }}" class="btn btn-secondary">
+                            <i class="fa fa-arrow-left"></i> Retour à la liste
+                        </a>
+                        <a href="{{ path('app_etudiant_edit', {'id': etudiant.id}) }}" class="btn btn-warning">
+                            <i class="fa fa-edit"></i> Modifier
+                        </a>
+                        <button type="button" class="btn btn-danger" onclick="deleteEtudiant({{ etudiant.id }})">
+                            <i class="fa fa-trash"></i> Supprimer
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script>
+function deleteEtudiant(id) {
+    Swal.fire({
+        title: 'Êtes-vous sûr ?',
+        text: "Cette action est irréversible !",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Oui, supprimer',
+        cancelButtonText: 'Annuler'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = `/etudiant/${id}`;
+
+            const tokenInput = document.createElement('input');
+            tokenInput.type = 'hidden';
+            tokenInput.name = '_token';
+            tokenInput.value = '{{ csrf_token('delete' ~ '1') }}'.replace('1', id);
+
+            form.appendChild(tokenInput);
+            document.body.appendChild(form);
+            form.submit();
+        }
+    });
+}
+</script>
+{% endblock %}

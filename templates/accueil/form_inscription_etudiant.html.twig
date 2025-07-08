@@ -1,0 +1,541 @@
+<div class="bg-white p-75">
+    <!-- Progress Bar -->
+    <div class="progress-wrapper mb-4">
+        <div class="progress" style="height: 8px;">
+            <div class="progress-bar bg-primary" id="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+        <div class="d-flex justify-content-between mt-2">
+            <div class="step-indicator active" data-step="1">
+                <div class="step-circle">1</div>
+                <div class="step-label">Informations<br>personnelles</div>
+            </div>
+            <div class="step-indicator" data-step="2">
+                <div class="step-circle">2</div>
+                <div class="step-label">Informations<br>académiques</div>
+            </div>
+            <div class="step-indicator" data-step="3">
+                <div class="step-circle">3</div>
+                <div class="step-label">Contact<br>social</div>
+            </div>
+            <div class="step-indicator" data-step="4">
+                <div class="step-circle">4</div>
+                <div class="step-label">Engagement</div>
+            </div>
+        </div>
+    </div>
+
+    <form id="form-etudiant" autocomplete="off">
+        <!-- Step 1: Infos personnelles -->
+        <div class="step" id="step-1">
+            <div class="step-header mb-4">
+                <h4 class="text-primary mb-2">
+                    <i class="icon ni ni-user-alt me-2"></i>
+                    Étape 1 : Informations personnelles
+                </h4>
+                <p class="text-muted">Veuillez remplir vos informations personnelles de base</p>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 mb-3">
+                    <label for="nom" class="label-bold">Nom</label>
+                    <input type="text" class="form-control" id="nom" name="nom" required>
+                </div>
+                <div class="col-lg-6 mb-3">
+                    <label for="prenoms" class="label-bold">Prénoms</label>
+                    <input type="text" class="form-control" id="prenoms" name="prenoms" required>
+                </div>
+                <div class="col-lg-6 mb-3">
+                    <label for="sexe" class="label-bold">Sexe</label>
+                    <select class="form-select" id="sexe" name="sexe" required>
+                        <option value="">Choisir...</option>
+                        <option value="Masculin">Masculin</option>
+                        <option value="Féminin">Féminin</option>
+                    </select>
+                </div>
+                <div class="col-lg-6 mb-3">
+                    <label for="dateNaissance" class="label-bold">Date de naissance</label>
+                    <input type="date" class="form-control" id="dateNaissance" name="dateNaissance" required>
+                </div>
+                <div class="col-lg-6 mb-3">
+                    <label for="lieuNaissance" class="label-bold">Lieu de naissance</label>
+                    <input type="text" class="form-control" id="lieuNaissance" name="lieuNaissance" required>
+                </div>
+                <div class="col-lg-6 mb-3">
+                    <label for="village" class="label-bold">Village d'origine</label>
+                    <select class="form-select" id="village" name="village" required></select>
+                    <input type="text" class="form-control mt-2 d-none" id="village-autre" placeholder="Saisir un nouveau village...">
+                </div>
+                <div class="col-lg-6 mb-3">
+                    <label for="telephone" class="label-bold">Téléphone (WhatsApp)</label>
+                    <input type="tel" class="form-control" id="telephone" name="telephone" required>
+                </div>
+                <div class="col-lg-6 mb-3">
+                    <label for="email" class="label-bold">Email</label>
+                    <input type="email" class="form-control" id="email" name="email" required>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 2: Infos académiques -->
+        <div class="step d-none" id="step-2">
+            <div class="step-header mb-4">
+                <h4 class="text-primary mb-2">
+                    <i class="icon ni ni-graduation me-2"></i>
+                    Étape 2 : Informations académiques
+                </h4>
+                <p class="text-muted">Renseignez vos informations d'études et de formation</p>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 mb-3">
+                    <label for="niveauEtude" class="label-bold">Niveau d'étude actuel</label>
+                    <select class="form-select" id="niveauEtude" name="niveauEtude" required></select>
+                    <input type="text" class="form-control mt-2 d-none" id="niveauEtude-autre" placeholder="Saisir un nouveau niveau...">
+                </div>
+                <div class="col-lg-6 mb-3">
+                    <label for="filiere" class="label-bold">Filière</label>
+                    <select class="form-select" id="filiere" name="filiere" required></select>
+                    <input type="text" class="form-control mt-2 d-none" id="filiere-autre" placeholder="Saisir une nouvelle filière...">
+                </div>
+                <div class="col-lg-6 mb-3">
+                    <label for="etablissement" class="label-bold">Établissement</label>
+                    <select class="form-select" id="etablissement" name="etablissement" required></select>
+                    <input type="text" class="form-control mt-2 d-none" id="etablissement-autre" placeholder="Saisir un nouvel établissement...">
+                </div>
+                <div class="col-lg-6 mb-3">
+                    <label for="anneeAcademique" class="label-bold">Année académique</label>
+                    <select class="form-select" id="anneeAcademique" name="anneeAcademique" required></select>
+                    <input type="text" class="form-control mt-2 d-none" id="anneeAcademique-autre" placeholder="Saisir une nouvelle année...">
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 3: Informations sociales -->
+        <div class="step d-none" id="step-3">
+            <div class="step-header mb-4">
+                <h4 class="text-primary mb-2">
+                    <i class="icon ni ni-phone me-2"></i>
+                    Étape 3 : Contact social
+                </h4>
+                <p class="text-muted">Indiquez les coordonnées de votre contact d'urgence</p>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="nomContact" class="label-bold">Nom du contact</label>
+                    <input type="text" class="form-control" id="nomContact" name="nomContact" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="numeroTelephone" class="label-bold">Téléphone du contact</label>
+                    <input type="tel" class="form-control" id="numeroTelephone" name="numeroTelephone" required>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 4: Engagement -->
+        <div class="step d-none" id="step-4">
+            <div class="step-header mb-4">
+                <h4 class="text-primary mb-2">
+                    <i class="icon ni ni-check-circle me-2"></i>
+                    Étape 4 : Engagement
+                </h4>
+                <p class="text-muted">Définissez vos souhaits d'engagement dans l'association</p>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label class="label-bold">A déjà participé à une activité ?</label><br>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="isParticipeActivite" id="participeOui" value="1" required>
+                        <label class="form-check-label" for="participeOui">Oui</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="isParticipeActivite" id="participeNon" value="0">
+                        <label class="form-check-label" for="participeNon">Non</label>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label class="label-bold">Veut devenir membre actif ?</label><br>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="isSouhaiteDevenirMembre" id="membreOui" value="1" required>
+                        <label class="form-check-label" for="membreOui">Oui</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="isSouhaiteDevenirMembre" id="membreNon" value="0">
+                        <label class="form-check-label" for="membreNon">Non</label>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label class="label-bold">Veut intégrer une commission ?</label><br>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="isSouhaiteIntegrerCommission" id="commissionOui" value="1" required>
+                        <label class="form-check-label" for="commissionOui">Oui</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="isSouhaiteIntegrerCommission" id="commissionNon" value="0">
+                        <label class="form-check-label" for="commissionNon">Non</label>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3" id="commission-block" style="display:none;">
+                    <label for="commission" class="label-bold">Commission</label>
+                    <select class="form-control" id="commission" name="commission"></select>
+                    <input type="text" class="form-control mt-2 d-none" id="commission-autre" placeholder="Saisir une nouvelle commission...">
+                </div>
+                <div class="col-12 mb-3">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="certif" name="certif" required>
+                        <label class="form-check-label label-bold" for="certif">
+                            Je certifie sur l'honneur que les informations sont exactes
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation buttons -->
+        <div class="d-flex justify-content-between mt-4">
+            <button type="button" class="btn btn-secondary" id="prev-step" disabled>Précédent</button>
+            <button type="button" class="btn btn-primary" id="next-step">Suivant</button>
+            <button type="submit" class="btn btn-success d-none" id="submit-btn">S'enregistrer</button>
+        </div>
+    </form>
+
+</div>
+
+<!-- CSS pour les étapes -->
+<style>
+.progress-wrapper {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+}
+
+.step-indicator {
+    text-align: center;
+    position: relative;
+    flex: 1;
+}
+
+.step-circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #e9ecef;
+    color: #6c757d;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    margin: 0 auto 8px;
+    transition: all 0.3s ease;
+}
+
+.step-indicator.active .step-circle {
+    background: #007bff;
+    color: white;
+}
+
+.step-indicator.completed .step-circle {
+    background: #28a745;
+    color: white;
+}
+
+.step-label {
+    font-size: 12px;
+    color: #6c757d;
+    line-height: 1.2;
+}
+
+.step-indicator.active .step-label {
+    color: #007bff;
+    font-weight: bold;
+}
+
+.step-indicator.completed .step-label {
+    color: #28a745;
+    font-weight: bold;
+}
+
+.step-header {
+    border-left: 4px solid #007bff;
+    padding-left: 15px;
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 5px;
+}
+</style>
+
+<!-- SweetAlert2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+// Stepper avec indicateurs visuels
+let currentStep = 1;
+const totalSteps = 4;
+
+const updateProgress = (step) => {
+  // Mise à jour de la barre de progression
+  const progress = (step / totalSteps) * 100;
+  document.getElementById('progress-bar').style.width = progress + '%';
+  document.getElementById('progress-bar').setAttribute('aria-valuenow', progress);
+  
+  // Mise à jour des indicateurs d'étapes
+  document.querySelectorAll('.step-indicator').forEach((indicator, idx) => {
+    const stepNum = idx + 1;
+    indicator.classList.remove('active', 'completed');
+    
+    if (stepNum < step) {
+      indicator.classList.add('completed');
+    } else if (stepNum === step) {
+      indicator.classList.add('active');
+    }
+  });
+};
+
+const showStep = (step) => {
+  document.querySelectorAll('.step').forEach((el, idx) => {
+    el.classList.toggle('d-none', idx !== step-1);
+  });
+  document.getElementById('prev-step').disabled = (step === 1);
+  document.getElementById('next-step').classList.toggle('d-none', step === totalSteps);
+  document.getElementById('submit-btn').classList.toggle('d-none', step !== totalSteps);
+  
+  // Mise à jour de la progression
+  updateProgress(step);
+};
+
+// Validation simple par étape
+function validateStep(step) {
+  const stepDiv = document.getElementById('step-' + step);
+  let valid = true;
+  stepDiv.querySelectorAll('input,select').forEach(input => {
+    if (input.required && !input.value) valid = false;
+    if (input.type === 'radio') {
+      const radios = stepDiv.querySelectorAll('input[name="' + input.name + '"]');
+      if ([...radios].filter(r=>r.checked).length === 0) valid = false;
+    }
+  });
+  return valid;
+}
+
+document.getElementById('next-step').onclick = function() {
+  if (validateStep(currentStep)) {
+    currentStep++;
+    showStep(currentStep);
+    saveForm();
+  } else {
+    Swal.fire({icon:'warning', title:'Champs obligatoires', text:'Veuillez remplir tous les champs obligatoires.'});
+  }
+};
+document.getElementById('prev-step').onclick = function() {
+  if (currentStep > 1) {
+    currentStep--;
+    showStep(currentStep);
+    saveForm();
+  }
+};
+showStep(currentStep);
+
+// Affichage du champ commission si besoin
+const radiosCommission = document.getElementsByName('isSouhaiteIntegrerCommission');
+radiosCommission.forEach(radio => {
+  radio.addEventListener('change', function() {
+    document.getElementById('commission-block').style.display = (this.value === '1') ? '' : 'none';
+  });
+});
+
+// Auto-save localStorage
+const form = document.getElementById('form-etudiant');
+function saveForm() {
+  const data = Object.fromEntries(new FormData(form).entries());
+  localStorage.setItem('formEtudiant', JSON.stringify(data));
+}
+function loadForm() {
+  const data = JSON.parse(localStorage.getItem('formEtudiant')||'null');
+  if (!data) return;
+  Object.entries(data).forEach(([k,v]) => {
+    const el = form.elements[k];
+    if (!el) return;
+    if (el.type === 'radio' || el.type === 'checkbox') {
+      if (Array.isArray(form[k])) {
+        form[k].forEach(e => { if (e.value === v) e.checked = true; });
+      } else {
+        el.checked = (el.value === v);
+      }
+    } else {
+      el.value = v;
+    }
+  });
+}
+form.addEventListener('input', saveForm);
+window.addEventListener('DOMContentLoaded', loadForm);
+
+// Datalists dynamiques (fetch)
+const lists = [
+  {id:'village-list', url:'{{ path('app_village_list') }}'},
+  {id:'filiere-list', url:'{{ path('app_filiere_list') }}'},
+  {id:'etablissement-list', url:'{{ path('app_etablissement_list') }}'},
+  {id:'commission-list', url:'{{ path('app_commission_list') }}'},
+  {id:'niveau-list', url:'{{ path('app_niveau_etude_list') }}'},
+  {id:'annee-list', url:'{{ path('app_annee_academique_list') }}'}
+];
+lists.forEach(({id,url}) => {
+  fetch(url).then(r=>r.json()).then(data => {
+    const dl = document.getElementById(id);
+    if (dl) dl.innerHTML = data.map(v => `<option value="${v}">`).join('');
+  });
+});
+
+// Création à la volée si besoin (à la soumission)
+async function createIfNotExist(field, value, url) {
+  if (!value) return null;
+  const res = await fetch(url, {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({nom:value})});
+  if (res.ok) return await res.json();
+  return null;
+}
+
+// Validation stricte email et téléphone Bénin
+function isValidEmail(email) {
+  return /^[\w.-]+@[\w.-]+\.[a-zA-Z]{2,}$/.test(email);
+}
+function isValidBeninPhone(phone) {
+  return /^01\d{8}$/.test(phone);
+}
+
+// Préremplir et verrouiller le préfixe '01' sur les champs téléphone
+function lockBeninPhoneInput(input) {
+  input.value = input.value.startsWith('01') ? input.value : '01';
+  input.addEventListener('keydown', function(e) {
+    // Empêcher suppression du 0 ou du 1
+    if ((this.selectionStart <= 2 && (e.key === 'Backspace' || e.key === 'Delete')) ||
+        (this.selectionStart === 1 && e.key.length === 1)) {
+      e.preventDefault();
+    }
+    // Empêcher saisie de lettres
+    if (e.key.length === 1 && !/\d/.test(e.key)) {
+      e.preventDefault();
+    }
+    // Limiter à 10 chiffres
+    if (this.value.length >= 10 && this.selectionStart >= 10 && e.key.length === 1 && /\d/.test(e.key)) {
+      e.preventDefault();
+    }
+  });
+  input.addEventListener('input', function() {
+    // Corrige si l'utilisateur tente de supprimer le préfixe
+    if (!this.value.startsWith('01')) this.value = '01';
+    // Supprime tout caractère non numérique
+    this.value = this.value.replace(/[^\d]/g, '');
+    // Limite à 10 chiffres
+    if (this.value.length > 10) this.value = this.value.slice(0, 10);
+  });
+}
+window.addEventListener('DOMContentLoaded', function() {
+  lockBeninPhoneInput(document.getElementById('telephone'));
+  lockBeninPhoneInput(document.getElementById('numeroTelephone'));
+  // Village select dynamique
+  fetch("{{ path('app_village_list') }}").then(r=>r.json()).then(data => {
+    const select = document.getElementById('village');
+    select.innerHTML = '<option value="">Sélectionner...</option>' +
+      data.map(v => `<option value="${v}">${v}</option>`).join('') +
+      '<option value="__autre__">Autre...</option>';
+  });
+  const select = document.getElementById('village');
+  const inputAutre = document.getElementById('village-autre');
+  select.addEventListener('change', function() {
+    if (this.value === '__autre__') {
+      inputAutre.classList.remove('d-none');
+      inputAutre.required = true;
+    } else {
+      inputAutre.classList.add('d-none');
+      inputAutre.required = false;
+    }
+  });
+
+  // Tous les selects dynamiques
+  const dynamicFields = [
+    {id:'village', url:"{{ path('app_village_list') }}", placeholder:'Saisir un nouveau village...'},
+    {id:'filiere', url:"{{ path('app_filiere_list') }}", placeholder:'Saisir une nouvelle filière...'},
+    {id:'etablissement', url:"{{ path('app_etablissement_list') }}", placeholder:'Saisir un nouvel établissement...'},
+    {id:'commission', url:"{{ path('app_commission_list') }}", placeholder:'Saisir une nouvelle commission...'},
+    {id:'niveauEtude', url:"{{ path('app_niveau_etude_list') }}", placeholder:'Saisir un nouveau niveau...'},
+    {id:'anneeAcademique', url:"{{ path('app_annee_academique_list') }}", placeholder:'Saisir une nouvelle année...'}
+  ];
+
+  dynamicFields.forEach(field => {
+    fetch(field.url).then(r=>r.json()).then(data => {
+      const select = document.getElementById(field.id);
+      select.innerHTML = '<option value="">Sélectionner...</option>' +
+        data.map(v => `<option value="${v}">${v}</option>`).join('') +
+        '<option value="__autre__">Autre...</option>';
+    });
+
+    const select = document.getElementById(field.id);
+    const inputAutre = document.getElementById(field.id + '-autre');
+    if (inputAutre) {
+      inputAutre.placeholder = field.placeholder;
+      select.addEventListener('change', function() {
+        if (this.value === '__autre__') {
+          inputAutre.classList.remove('d-none');
+          inputAutre.required = true;
+        } else {
+          inputAutre.classList.add('d-none');
+          inputAutre.required = false;
+        }
+      });
+    }
+  });
+});
+
+// Soumission AJAX
+form.onsubmit = async function(e) {
+  e.preventDefault();
+  if (!validateStep(currentStep)) {
+    Swal.fire({icon:'warning', title:'Champs obligatoires', text:'Veuillez remplir tous les champs obligatoires.'});
+    return;
+  }
+  // Validation email
+  const email = form.elements['email'].value;
+  if (!isValidEmail(email)) {
+    Swal.fire({icon:'error', title:'Email invalide', text:'Veuillez saisir une adresse email valide.'});
+    return;
+  }
+  // Validation téléphone Bénin
+  const tel1 = form.elements['telephone'].value;
+  const tel2 = form.elements['numeroTelephone'].value;
+  if (!isValidBeninPhone(tel1) || !isValidBeninPhone(tel2)) {
+    Swal.fire({icon:'error', title:'Numéro invalide', text:'Le numéro doit commencer par 01 et contenir 10 chiffres (Benin).'});
+    return;
+  }
+  const data = Object.fromEntries(new FormData(form).entries());
+  // Récupération des valeurs avec gestion "Autre..."
+  const getFieldValue = (fieldName) => {
+    const select = form.elements[fieldName];
+    let value = select.value;
+    if (value === '__autre__') {
+      value = document.getElementById(fieldName + '-autre').value;
+    }
+    return value;
+  };
+
+  data.village = await createIfNotExist('village', getFieldValue('village'), '{{ path('app_village_create_if_needed') }}');
+  data.filiere = await createIfNotExist('filiere', getFieldValue('filiere'), '{{ path('app_filiere_create_if_needed') }}');
+  data.etablissement = await createIfNotExist('etablissement', getFieldValue('etablissement'), '{{ path('app_etablissement_create_if_needed') }}');
+  data.commission = data.isSouhaiteIntegrerCommission==='1' ? await createIfNotExist('commission', getFieldValue('commission'), '{{ path('app_commission_create_if_needed') }}') : null;
+  data.niveauEtude = await createIfNotExist('niveauEtude', getFieldValue('niveauEtude'), '{{ path('app_niveau_etude_create_if_needed') }}');
+  data.anneeAcademique = await createIfNotExist('anneeAcademique', getFieldValue('anneeAcademique'), '{{ path('app_annee_academique_create_if_needed') }}');
+  // Envoi final
+  fetch('/etudiant/inscription_ajax', {
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify(data)
+  })
+  .then(r=>r.json())
+  .then(resp => {
+    if (resp.success) {
+      localStorage.removeItem('formEtudiant');
+      Swal.fire({icon:'success', title:'Inscription réussie', text:'Merci pour votre participation.'}).then(()=>{
+        window.location.href = '/';
+      });
+    } else {
+      Swal.fire({icon:'error', title:'Erreur', text:resp.message || 'Une erreur est survenue lors de l\'inscription.'});
+    }
+  })
+  .catch(()=>Swal.fire({icon:'error', title:'Erreur réseau', text:'Merci de vérifier votre connexion internet.'}));
+};
+</script>

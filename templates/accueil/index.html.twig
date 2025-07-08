@@ -1,0 +1,11 @@
+{% extends 'baseSite.html.twig' %}
+
+{% block title %}Accueil - AdET{% endblock %}
+
+{% block page_title %}Inscription des étudiants de l'arrondissement de Tchaada{% endblock %}
+
+{% block page_description %}Formulaire d'enrôlement pour les étudiants souhaitant s'inscrire dans notre base de données.{% endblock %}
+
+{% block body %}
+{{ include('accueil/form_inscription_etudiant.html.twig') }}
+{% endblock %}

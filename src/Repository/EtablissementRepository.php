@@ -31,13 +31,18 @@ class EtablissementRepository extends ServiceEntityRepository
     //        ;
     //    }
 
-    //    public function findOneBySomeField($value): ?Etablissement
-    //    {
-    //        return $this->createQueryBuilder('e')
-    //            ->andWhere('e.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+    /**
+     * Trouve les établissements avec le plus d'étudiants
+     */
+    public function findTopEtablissements(int $limit = 5): array
+    {
+        return $this->createQueryBuilder('e')
+            ->select('e.nom, COUNT(ia.id) as totalEtudiants')
+            ->leftJoin('App\Entity\InformationAcademique', 'ia', 'WITH', 'ia.etablissement = e.id')
+            ->groupBy('e.id')
+            ->orderBy('totalEtudiants', 'DESC')
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult();
+    }
 }

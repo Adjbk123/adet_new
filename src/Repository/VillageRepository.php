@@ -16,28 +16,18 @@ class VillageRepository extends ServiceEntityRepository
         parent::__construct($registry, Village::class);
     }
 
-    //    /**
-    //     * @return Village[] Returns an array of Village objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('v')
-    //            ->andWhere('v.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('v.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
-
-    //    public function findOneBySomeField($value): ?Village
-    //    {
-    //        return $this->createQueryBuilder('v')
-    //            ->andWhere('v.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+    /**
+     * Trouve les villages avec le plus d'étudiants
+     */
+    public function findTopVillages(int $limit = 5): array
+    {
+        return $this->createQueryBuilder('v')
+            ->select('v.nom, COUNT(e.id) as totalEtudiants')
+            ->leftJoin('App\Entity\Etudiant', 'e', 'WITH', 'e.village = v.id')
+            ->groupBy('v.id')
+            ->orderBy('totalEtudiants', 'DESC')
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult();
+    }
 }

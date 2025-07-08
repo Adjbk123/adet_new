@@ -16,28 +16,18 @@ class FiliereRepository extends ServiceEntityRepository
         parent::__construct($registry, Filiere::class);
     }
 
-    //    /**
-    //     * @return Filiere[] Returns an array of Filiere objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('f')
-    //            ->andWhere('f.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('f.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
-
-    //    public function findOneBySomeField($value): ?Filiere
-    //    {
-    //        return $this->createQueryBuilder('f')
-    //            ->andWhere('f.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+    /**
+     * Trouve les filières avec le plus d'étudiants
+     */
+    public function findTopFilieres(int $limit = 5): array
+    {
+        return $this->createQueryBuilder('f')
+            ->select('f.nom, COUNT(ia.id) as totalEtudiants')
+            ->leftJoin('App\Entity\InformationAcademique', 'ia', 'WITH', 'ia.filiere = f.id')
+            ->groupBy('f.id')
+            ->orderBy('totalEtudiants', 'DESC')
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult();
+    }
 }

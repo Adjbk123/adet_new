@@ -1,4 +1,7 @@
-<div class="bg-white p-75">
+<div id="loader" style="display:flex;align-items:center;justify-content:center;height:300px;font-size:1.5rem;">
+    <span>Chargement des données...</span>
+</div>
+<div id="form-container" class="bg-white p-75" style="display:none;">
     <!-- Progress Bar -->
     <div class="progress-wrapper mb-4">
         <div class="progress" style="height: 8px;">
@@ -366,20 +369,51 @@ function loadForm() {
 form.addEventListener('input', saveForm);
 window.addEventListener('DOMContentLoaded', loadForm);
 
-// Datalists dynamiques (fetch)
-const lists = [
-  {id:'village-list', url:'{{ path('app_village_list') }}'},
-  {id:'filiere-list', url:'{{ path('app_filiere_list') }}'},
-  {id:'etablissement-list', url:'{{ path('app_etablissement_list') }}'},
-  {id:'commission-list', url:'{{ path('app_commission_list') }}'},
-  {id:'niveau-list', url:'{{ path('app_niveau_etude_list') }}'},
-  {id:'annee-list', url:'{{ path('app_annee_academique_list') }}'}
+// Loader et chargement dynamique
+const formContainer = document.getElementById('form-container');
+const loader = document.getElementById('loader');
+const dynamicFields = [
+    {id:'village', url:"{{ path('app_village_list') }}", placeholder:'Saisir un nouveau village...'},
+    {id:'filiere', url:"{{ path('app_filiere_list') }}", placeholder:'Saisir une nouvelle filière...'},
+    {id:'etablissement', url:"{{ path('app_etablissement_list') }}", placeholder:'Saisir un nouvel établissement...'},
+    {id:'commission', url:"{{ path('app_commission_list') }}", placeholder:'Saisir une nouvelle commission...'},
+    {id:'niveauEtude', url:"{{ path('app_niveau_etude_list') }}", placeholder:'Saisir un nouveau niveau...'},
+    {id:'anneeAcademique', url:"{{ path('app_annee_academique_list') }}", placeholder:'Saisir une nouvelle année...'}
 ];
-lists.forEach(({id,url}) => {
-  fetch(url).then(r=>r.json()).then(data => {
-    const dl = document.getElementById(id);
-    if (dl) dl.innerHTML = data.map(v => `<option value="${v}">`).join('');
-  });
+
+let loadedFields = 0;
+function checkAllLoaded() {
+    loadedFields++;
+    if (loadedFields === dynamicFields.length) {
+        loader.style.display = 'none';
+        formContainer.style.display = '';
+    }
+}
+
+dynamicFields.forEach(field => {
+    fetch(field.url).then(r=>r.json()).then(data => {
+        const select = document.getElementById(field.id);
+        select.innerHTML = '<option value="">Sélectionner...</option>' +
+            data.map(v => `<option value="${v}">${v}</option>`).join('') +
+            '<option value="__autre__">Autre...</option>';
+        checkAllLoaded();
+    });
+
+    const select = document.getElementById(field.id);
+    const inputAutre = document.getElementById(field.id + '-autre');
+    if (inputAutre) {
+        inputAutre.placeholder = field.placeholder;
+        select.addEventListener('change', function() {
+            if (this.value === '__autre__') {
+                inputAutre.classList.remove('d-none');
+                inputAutre.required = true;
+                inputAutre.focus();
+            } else {
+                inputAutre.classList.add('d-none');
+                inputAutre.required = false;
+            }
+        });
+    }
 });
 
 // Création à la volée si besoin (à la soumission)
@@ -429,58 +463,26 @@ window.addEventListener('DOMContentLoaded', function() {
   lockBeninPhoneInput(document.getElementById('telephone'));
   lockBeninPhoneInput(document.getElementById('numeroTelephone'));
   // Village select dynamique
-  fetch("{{ path('app_village_list') }}").then(r=>r.json()).then(data => {
-    const select = document.getElementById('village');
-    select.innerHTML = '<option value="">Sélectionner...</option>' +
-      data.map(v => `<option value="${v}">${v}</option>`).join('') +
-      '<option value="__autre__">Autre...</option>';
-  });
-  const select = document.getElementById('village');
-  const inputAutre = document.getElementById('village-autre');
-  select.addEventListener('change', function() {
-    if (this.value === '__autre__') {
-      inputAutre.classList.remove('d-none');
-      inputAutre.required = true;
-    } else {
-      inputAutre.classList.add('d-none');
-      inputAutre.required = false;
-    }
-  });
+  // fetch("{{ path('app_village_list') }}").then(r=>r.json()).then(data => {
+  //   const select = document.getElementById('village');
+  //   select.innerHTML = '<option value="">Sélectionner...</option>' +
+  //     data.map(v => `<option value="${v}">${v}</option>`).join('') +
+  //     '<option value="__autre__">Autre...</option>';
+  // });
+  // const select = document.getElementById('village');
+  // const inputAutre = document.getElementById('village-autre');
+  // select.addEventListener('change', function() {
+  //   if (this.value === '__autre__') {
+  //     inputAutre.classList.remove('d-none');
+  //     inputAutre.required = true;
+  //   } else {
+  //     inputAutre.classList.add('d-none');
+  //     inputAutre.required = false;
+  //   }
+  // });
 
   // Tous les selects dynamiques
-  const dynamicFields = [
-    {id:'village', url:"{{ path('app_village_list') }}", placeholder:'Saisir un nouveau village...'},
-    {id:'filiere', url:"{{ path('app_filiere_list') }}", placeholder:'Saisir une nouvelle filière...'},
-    {id:'etablissement', url:"{{ path('app_etablissement_list') }}", placeholder:'Saisir un nouvel établissement...'},
-    {id:'commission', url:"{{ path('app_commission_list') }}", placeholder:'Saisir une nouvelle commission...'},
-    {id:'niveauEtude', url:"{{ path('app_niveau_etude_list') }}", placeholder:'Saisir un nouveau niveau...'},
-    {id:'anneeAcademique', url:"{{ path('app_annee_academique_list') }}", placeholder:'Saisir une nouvelle année...'}
-  ];
-
-  dynamicFields.forEach(field => {
-    fetch(field.url).then(r=>r.json()).then(data => {
-      const select = document.getElementById(field.id);
-      select.innerHTML = '<option value="">Sélectionner...</option>' +
-        data.map(v => `<option value="${v}">${v}</option>`).join('') +
-        '<option value="__autre__">Autre...</option>';
-    });
-
-    const select = document.getElementById(field.id);
-    const inputAutre = document.getElementById(field.id + '-autre');
-    if (inputAutre) {
-      inputAutre.placeholder = field.placeholder;
-      select.addEventListener('change', function() {
-        if (this.value === '__autre__') {
-          inputAutre.classList.remove('d-none');
-          inputAutre.required = true;
-        } else {
-          inputAutre.classList.add('d-none');
-          inputAutre.required = false;
-        }
-      });
-    }
-  });
-});
+}); // fermeture correcte du window.addEventListener('DOMContentLoaded', ...)
 
 // Soumission AJAX
 form.onsubmit = async function(e) {
